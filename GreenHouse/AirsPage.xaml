@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:charts="clr-namespace:System.Windows.Forms.DataVisualization.Charting;assembly=System.Windows.Forms.DataVisualization"
       xmlns:local="clr-namespace:GreenHouse"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
@@ -19,7 +20,8 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <DataGrid x:Name="airsGrid" Grid.Row="1" Loaded="GridLoaded" AutoGenerateColumns="False" ItemsSource="{Binding}">
+        
+        <DataGrid x:Name="airsGrid" Grid.Column="0" Loaded="GridLoaded" AutoGenerateColumns="False" ItemsSource="{Binding}" Grid.RowSpan="2">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="Id" Header="Номер датчика"  Binding="{Binding Id}"/>
                 <DataGridTextColumn x:Name="Temperature" Header="Температура" Binding="{Binding Temperature}"/>
@@ -27,5 +29,16 @@
 
             </DataGrid.Columns>
         </DataGrid>
+        <ComboBox x:Name="typeSelection" Grid.Row="2" Width="100" Height="20">
+
+        </ComboBox>
+        
+        <WindowsFormsHost Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <charts:Chart x:Name="AirsChart">
+                <charts:Chart.Legends>
+
+                </charts:Chart.Legends>
+            </charts:Chart>
+        </WindowsFormsHost>
     </Grid>
 </Page>

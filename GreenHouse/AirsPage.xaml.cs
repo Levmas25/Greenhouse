@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace GreenHouse
 {
@@ -26,11 +27,44 @@ namespace GreenHouse
         public AirsPage()
         {
             InitializeComponent();
-
             DispatcherTimer timer = new DispatcherTimer();
             timer.Tick += new EventHandler(UpdateGrid);
-            timer.Interval = new TimeSpan(0, 0, 4);
+            timer.Interval = new TimeSpan(0, 0, 3);
             timer.Start();
+
+            typeSelection.Items.Add("Температура");
+            typeSelection.Items.Add("Влажность");
+
+            AirsChart.ChartAreas.Add(new ChartArea("Main"));
+
+            var firstSens = new Series("First")
+            {
+                IsValueShownAsLabel = true,
+                ChartType = SeriesChartType.Line,
+            };
+
+            AirsChart.Series.Add(firstSens);
+
+            var secondSens = new Series("Second")
+            {
+                IsValueShownAsLabel = true,
+                ChartType = SeriesChartType.Line,
+            };
+            AirsChart.Series.Add(secondSens);
+
+            var thirdSens = new Series("Third")
+            {
+                IsValueShownAsLabel = true,
+                ChartType = SeriesChartType.Line,
+            };
+            AirsChart.Series.Add(thirdSens);
+
+            var fourthSens = new Series("Fourth")
+            {
+                IsValueShownAsLabel = true,
+                ChartType = SeriesChartType.Line,
+            };
+            AirsChart.Series.Add(fourthSens);
         }
 
         private void UpdateGrid(object sender, EventArgs e)
@@ -43,8 +77,15 @@ namespace GreenHouse
             airRows.Add(GetRequest(4));
 
             airsGrid.ItemsSource = airRows;
-        }
 
+            if (typeSelection.SelectedItem.ToString() == "Температура")
+            {
+                AirsChart.Series["First"].Points.AddXY(DateTime.Now.ToString(), airRows[0].Temperature);
+                AirsChart.Series["Second"].Points.AddXY(DateTime.Now.ToString(), airRows[1].Temperature);
+                AirsChart.Series["Third"].Points.AddXY(DateTime.Now.ToString(), airRows[2].Temperature);
+                AirsChart.Series["Fourth"].Points.AddXY(DateTime.Now.ToString(), airRows[3].Temperature);
+            }
+        }
 
         private void GridLoaded(object sender, RoutedEventArgs e)
         {
