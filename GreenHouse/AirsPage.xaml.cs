@@ -36,36 +36,45 @@ namespace GreenHouse
             typeSelection.Items.Add("Влажность");
 
             AirsChart.ChartAreas.Add(new ChartArea("Main"));
+            AirsChart.Titles.Add("Показания температуры с датчиков воздуха");
 
-            var firstSens = new Series("First")
+            var firstSens = new Series("Первый")
             {
+                IsVisibleInLegend = true,
                 IsValueShownAsLabel = true,
                 ChartType = SeriesChartType.Line,
             };
 
             AirsChart.Series.Add(firstSens);
 
-            var secondSens = new Series("Second")
+            var secondSens = new Series("Второй")
             {
+                IsVisibleInLegend = true,
                 IsValueShownAsLabel = true,
                 ChartType = SeriesChartType.Line,
             };
             AirsChart.Series.Add(secondSens);
 
-            var thirdSens = new Series("Third")
+            var thirdSens = new Series("Третий")
             {
+                IsVisibleInLegend = true,
                 IsValueShownAsLabel = true,
                 ChartType = SeriesChartType.Line,
             };
             AirsChart.Series.Add(thirdSens);
 
-            var fourthSens = new Series("Fourth")
+            var fourthSens = new Series("Четвёртый")
             {
+                IsVisibleInLegend = true,
                 IsValueShownAsLabel = true,
                 ChartType = SeriesChartType.Line,
             };
             AirsChart.Series.Add(fourthSens);
+
+            AirsChart.Legends.Add(new Legend("First"));
+            typeSelection.SelectedIndex = 0;
         }
+
 
         private void UpdateGrid(object sender, EventArgs e)
         {
@@ -78,13 +87,38 @@ namespace GreenHouse
 
             airsGrid.ItemsSource = airRows;
 
-            if (typeSelection.SelectedItem.ToString() == "Температура")
+
+            if (typeSelection.SelectedIndex == 0)
             {
-                AirsChart.Series["First"].Points.AddXY(DateTime.Now.ToString(), airRows[0].Temperature);
-                AirsChart.Series["Second"].Points.AddXY(DateTime.Now.ToString(), airRows[1].Temperature);
-                AirsChart.Series["Third"].Points.AddXY(DateTime.Now.ToString(), airRows[2].Temperature);
-                AirsChart.Series["Fourth"].Points.AddXY(DateTime.Now.ToString(), airRows[3].Temperature);
+                AirsChart.Series["Первый"].Points.AddXY(DateTime.Now.ToString(), airRows[0].Temperature);
+                AirsChart.Series["Второй"].Points.AddXY(DateTime.Now.ToString(), airRows[1].Temperature);
+                AirsChart.Series["Третий"].Points.AddXY(DateTime.Now.ToString(), airRows[2].Temperature);
+                AirsChart.Series["Четвёртый"].Points.AddXY(DateTime.Now.ToString(), airRows[3].Temperature);
             }
+            else
+            {
+                AirsChart.Series["Первый"].Points.AddXY(DateTime.Now.ToString(), airRows[0].Humidity);
+                AirsChart.Series["Второй"].Points.AddXY(DateTime.Now.ToString(), airRows[1].Humidity);
+                AirsChart.Series["Третий"].Points.AddXY(DateTime.Now.ToString(), airRows[2].Humidity);
+                AirsChart.Series["Четвёртый"].Points.AddXY(DateTime.Now.ToString(), airRows[3].Humidity);
+            }
+            
+        }
+
+        private void TypeSelection_Changed(object sender, RoutedEventArgs e)
+        {
+            if (typeSelection.SelectedIndex == 1)
+            {
+                AirsChart.Titles[0].Text = "Показания влажности с датчиков воздуха";
+            }
+            else
+            {
+                AirsChart.Titles[0].Text = "Показания температуры с датчиков воздуха";
+            }
+            AirsChart.Series["Первый"].Points.Clear();
+            AirsChart.Series["Второй"].Points.Clear();
+            AirsChart.Series["Третий"].Points.Clear();
+            AirsChart.Series["Четвёртый"].Points.Clear();
         }
 
         private void GridLoaded(object sender, RoutedEventArgs e)
@@ -107,6 +141,11 @@ namespace GreenHouse
 
             AirRow result = new AirRow(id, temperature, humidity);
             return result;
+        }
+
+        private void typeSelection_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

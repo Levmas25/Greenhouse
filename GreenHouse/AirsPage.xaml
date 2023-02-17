@@ -29,8 +29,8 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        <ComboBox x:Name="typeSelection" Grid.Row="2" Width="100" Height="20">
-
+        <ComboBox x:Name="typeSelection" Grid.Row="2" Width="100" Height="20" SelectionChanged="TypeSelection_Changed">
+            
         </ComboBox>
         
         <WindowsFormsHost Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
