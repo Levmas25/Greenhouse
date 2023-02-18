@@ -142,10 +142,5 @@ namespace GreenHouse
             AirRow result = new AirRow(id, temperature, humidity);
             return result;
         }
-
-        private void typeSelection_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
     }
 }

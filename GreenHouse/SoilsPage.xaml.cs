@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Windows.Input;
+using System.Windows.Markup.Localizer;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -36,6 +37,62 @@ namespace GreenHouse
             SoilsChart.ChartAreas.Add(new ChartArea("Main"));
             SoilsChart.Titles.Add("Показания влажности с датчиков почвы");
 
+            MakeChart();
+
+            
+
+            for (int i = 1; i < 7; i++)
+            {
+                soilId.Items.Add(i.ToString());
+            }
+        }
+
+        private void UpdateGrid(object sender, EventArgs e)
+        {
+            List<SoilRow> soilRows = new List<SoilRow>();
+
+            soilRows.Add(GetRequest(1));
+            soilRows.Add(GetRequest(2));
+            soilRows.Add(GetRequest(3));
+            soilRows.Add(GetRequest(4));
+            soilRows.Add(GetRequest(5));
+            soilRows.Add(GetRequest(6));
+
+            soilsGrid.ItemsSource = soilRows;
+
+            string now = DateTime.Now.ToString();
+
+            SoilsChart.Series["Первый"].Points.AddXY(now, soilRows[0].Humidity);
+            SoilsChart.Series["Второй"].Points.AddXY(now, soilRows[1].Humidity);
+            SoilsChart.Series["Третий"].Points.AddXY(now, soilRows[2].Humidity);
+            SoilsChart.Series["Четвёртый"].Points.AddXY(now, soilRows[3].Humidity);
+            SoilsChart.Series["Пятый"].Points.AddXY(now, soilRows[4].Humidity);
+            SoilsChart.Series["Шестой"].Points.AddXY(now, soilRows[5].Humidity);
+        }
+
+        private SoilRow GetRequest(int Id)
+        {
+            HttpClient client = new HttpClient();
+
+            string response = client.GetStringAsync($"https://dt.miet.ru/ppo_it/api/hum/{Id}").Result;
+            var values = JsonConvert.DeserializeObject<Dictionary<string, string>>(response);
+
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+
+            int id = Convert.ToInt32(values["id"]);
+            double humidity = Convert.ToDouble(values["humidity"]);
+
+            SoilRow result = new SoilRow(id, humidity);
+            return result;
+        }
+
+        private void GridLoaded(object sender, RoutedEventArgs e)
+        {
+            UpdateGrid(sender, e);
+        }
+
+        private void MakeChart()
+        {
             var firstSens = new Series("Первый")
             {
                 IsVisibleInLegend = true,
@@ -88,48 +145,36 @@ namespace GreenHouse
             SoilsChart.Legends.Add(new Legend("First"));
         }
 
-        private void UpdateGrid(object sender, EventArgs e)
+        private void PatchRequest(int id, int state)
         {
-            List<SoilRow> soilRows = new List<SoilRow>();
+            using (var client = new HttpClient())
+            {
+                var request = new HttpRequestMessage(new HttpMethod("PATCH"), $"https://dt.miet.ru/ppo_it/api/watering&id={id}&state={state}");
 
-            soilRows.Add(GetRequest(1));
-            soilRows.Add(GetRequest(2));
-            soilRows.Add(GetRequest(3));
-            soilRows.Add(GetRequest(4));
-            soilRows.Add(GetRequest(5));
-            soilRows.Add(GetRequest(6));
-
-            soilsGrid.ItemsSource = soilRows;
-
-            string now = DateTime.Now.ToString();
-
-            SoilsChart.Series["Первый"].Points.AddXY(now, soilRows[0].Humidity);
-            SoilsChart.Series["Второй"].Points.AddXY(now, soilRows[1].Humidity);
-            SoilsChart.Series["Третий"].Points.AddXY(now, soilRows[2].Humidity);
-            SoilsChart.Series["Четвёртый"].Points.AddXY(now, soilRows[3].Humidity);
-            SoilsChart.Series["Пятый"].Points.AddXY(now, soilRows[4].Humidity);
-            SoilsChart.Series["Шестой"].Points.AddXY(now, soilRows[5].Humidity);
+                try
+                {
+                    var response = client.SendAsync(request);
+                }
+                catch (HttpRequestException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
 
-        private SoilRow GetRequest(int Id)
+        private void SoilSelection_Changed(object sender, RoutedEventArgs e)
         {
-            HttpClient client = new HttpClient();
-
-            string response = client.GetStringAsync($"https://dt.miet.ru/ppo_it/api/hum/{Id}").Result;
-            var values = JsonConvert.DeserializeObject<Dictionary<string, string>>(response);
-
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-
-            int id = Convert.ToInt32(values["id"]);
-            double humidity = Convert.ToDouble(values["humidity"]);
-
-            SoilRow result = new SoilRow(id, humidity);
-            return result;
+            
         }
 
-        private void GridLoaded(object sender, RoutedEventArgs e)
+        private void ChangeContent(int id)
         {
-            UpdateGrid(sender, e);
+            
+        }
+
+        private void humBtn_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

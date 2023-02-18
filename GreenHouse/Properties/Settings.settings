@@ -1,7 +1,36 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="GreenHouse.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="WindowBtnContent" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="GeneralHumBtnContent" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MinTemperature" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="MaxHumidity" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="FirstSoilState" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Открыть полив</Value>
+    </Setting>
+    <Setting Name="SecondSoilState" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Открыть полив</Value>
+    </Setting>
+    <Setting Name="ThirdSoilState" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Открыть полив</Value>
+    </Setting>
+    <Setting Name="FourthSoilState" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Открыть полив</Value>
+    </Setting>
+    <Setting Name="FifsSoilState" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Открыть полив</Value>
+    </Setting>
+    <Setting Name="SixthSoilState" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Открыть полив</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

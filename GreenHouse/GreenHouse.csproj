@@ -66,6 +66,7 @@
     <Compile Include="MedianPage.xaml.cs">
       <DependentUpon>MedianPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MedianRow.cs" />
     <Compile Include="SoilRow.cs" />
     <Compile Include="SoilsPage.xaml.cs">
       <DependentUpon>SoilsPage.xaml</DependentUpon>
