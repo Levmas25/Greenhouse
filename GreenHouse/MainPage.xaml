@@ -13,7 +13,6 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
-            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -22,16 +21,7 @@
                     <Button x:Name="airBtn" Content="Датчики воздуха" Click="airBtn_Click"></Button>
                     <Button x:Name="soilBtn" Content="Датчики почвы" Click="soilBtn_Click"></Button>
                     <Button x:Name="medianBtn" Content="Средние значения" Click="medianBtn_Click"></Button>
-                </StackPanel>
-            </GroupBox>
-        </StackPanel>
-
-        <StackPanel Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <GroupBox>
-                <StackPanel>
-                    <Button></Button>
-                    <Button></Button>
-                    <Button></Button>
+                    <Button x:Name="settingsBtn" Content="Настройки" Click="settingsBtn_Click"></Button>
                 </StackPanel>
             </GroupBox>
         </StackPanel>

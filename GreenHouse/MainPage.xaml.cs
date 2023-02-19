@@ -39,5 +39,10 @@ namespace GreenHouse
         {
             NavigationService.Navigate(new MedianPage());
         }
+
+        private void settingsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new SettingsPage());
+        }
     }
 }

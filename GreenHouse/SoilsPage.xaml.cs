@@ -39,7 +39,8 @@ namespace GreenHouse
 
             MakeChart();
 
-            
+            soilId.SelectedIndex = 0;
+            humBtn.Content = Properties.Settings.Default.FirstSoilState;
 
             for (int i = 1; i < 7; i++)
             {
@@ -68,6 +69,20 @@ namespace GreenHouse
             SoilsChart.Series["Четвёртый"].Points.AddXY(now, soilRows[3].Humidity);
             SoilsChart.Series["Пятый"].Points.AddXY(now, soilRows[4].Humidity);
             SoilsChart.Series["Шестой"].Points.AddXY(now, soilRows[5].Humidity);
+
+            CheckValue(soilRows[soilId.SelectedIndex].Humidity);
+        }
+
+        private void CheckValue(double value)
+        {
+            if (value > Properties.Settings.Default.MaxSoilHum)
+            {
+                humBtn.IsEnabled = false;
+            }
+            else
+            {
+                humBtn.IsEnabled = true;
+            }
         }
 
         private SoilRow GetRequest(int Id)
@@ -164,17 +179,87 @@ namespace GreenHouse
 
         private void SoilSelection_Changed(object sender, RoutedEventArgs e)
         {
-            
+            ChangeContent(soilId.SelectedIndex + 1);
+            switch (soilId.SelectedIndex)
+            {
+                case 0:
+                    ChangeContent(1);
+                    humBtn.Content = Properties.Settings.Default.FirstSoilState;
+                    break;
+                case 1:
+                    ChangeContent(2);
+                    humBtn.Content = Properties.Settings.Default.SecondSoilState;
+                    break;
+                case 2:
+                    ChangeContent(3);
+                    humBtn.Content = Properties.Settings.Default.ThirdSoilState;
+                    break;
+                case 3:
+                    ChangeContent(4);
+                    humBtn.Content = Properties.Settings.Default.FourthSoilState;
+                    break;
+                case 4:
+                    ChangeContent(5);
+                    humBtn.Content = Properties.Settings.Default.FifsSoilState;
+                    break;
+                case 5:
+                    ChangeContent(6);
+                    humBtn.Content = Properties.Settings.Default.SixthSoilState;
+                    break;
+            }
+            CheckValue(((SoilRow)soilsGrid.Items[soilId.SelectedIndex]).Humidity);
+
         }
 
         private void ChangeContent(int id)
         {
-            
+            if (humBtn.Content.ToString() == "Открыть полив")
+            {
+                PatchRequest(id, 1);
+                humBtn.Content = "Зарыть полив";
+            }
+            else
+            {
+                PatchRequest(id, 0);
+                humBtn.Content = "Открыть полив";
+            }
         }
 
         private void humBtn_Click(object sender, RoutedEventArgs e)
         {
-            
+            switch (soilId.SelectedIndex)
+            {
+                case 0:
+                    ChangeContent(1);
+                    Properties.Settings.Default.FirstSoilState = humBtn.Content.ToString();
+                    break;
+                case 1:
+                    ChangeContent(2);
+                    Properties.Settings.Default.SecondSoilState = humBtn.Content.ToString();
+                    break;
+                case 2:
+                    ChangeContent(3);
+                    Properties.Settings.Default.ThirdSoilState = humBtn.Content.ToString();
+                    break;
+                case 3:
+                    ChangeContent(4);
+                    Properties.Settings.Default.FourthSoilState = humBtn.Content.ToString();
+                    break;
+                case 4:
+                    ChangeContent(5);
+                    Properties.Settings.Default.FifsSoilState = humBtn.Content.ToString();
+                    break;
+                case 5:
+                    ChangeContent(6);
+                    Properties.Settings.Default.SixthSoilState = humBtn.Content.ToString();
+                    break;
+            }
+            Properties.Settings.Default.Save();
+        }
+
+        private void OnClosing(object sender, ExitEventArgs e)
+        {
+
         }
     }
 }

@@ -67,6 +67,9 @@
       <DependentUpon>MedianPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MedianRow.cs" />
+    <Compile Include="SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SoilRow.cs" />
     <Compile Include="SoilsPage.xaml.cs">
       <DependentUpon>SoilsPage.xaml</DependentUpon>
@@ -91,6 +94,10 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Page Include="MedianPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

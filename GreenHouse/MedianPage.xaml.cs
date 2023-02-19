@@ -61,6 +61,24 @@ namespace GreenHouse
             medianChart.Series["Влажность воздуха"].Points.AddXY(now, airMedian[1]);
             medianChart.Series["Влажность почвы"].Points.AddXY(now, soilHum);
 
+            if (airMedian[0] < Properties.Settings.Default.MinTemperature && windowBtn.Content.ToString() == "Открыть форточки")
+            {
+                windowBtn.IsEnabled = false;
+            }
+            else
+            {
+                windowBtn.IsEnabled = true;
+            }
+
+            if (airMedian[1] > Properties.Settings.Default.MaxHumidity)
+            {
+                generalHumBtn.IsEnabled = false;
+            }
+            else
+            {
+                generalHumBtn.IsEnabled = true;
+            }
+
         }
 
         private void GridLoaded(object sender, RoutedEventArgs e)
@@ -165,6 +183,7 @@ namespace GreenHouse
         {
             if (windowBtn.Content.ToString() == "Открыть форточки")
             {
+
                 PatchRequest("https://dt.miet.ru/ppo_it/api/fork_drive", 1);
                 windowBtn.Content = "Закрыть форточки";
             }
