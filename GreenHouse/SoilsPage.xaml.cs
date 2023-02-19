@@ -207,7 +207,10 @@ namespace GreenHouse
                     humBtn.Content = Properties.Settings.Default.SixthSoilState;
                     break;
             }
-            CheckValue(((SoilRow)soilsGrid.Items[soilId.SelectedIndex]).Humidity);
+            if (soilsGrid.Items.Count > 0)
+            {
+                CheckValue(((SoilRow)soilsGrid.Items[soilId.SelectedIndex]).Humidity);
+            }
 
         }
 

@@ -23,6 +23,10 @@ namespace GreenHouse
         public SettingsPage()
         {
             InitializeComponent();
+
+            generalHum.Text = Properties.Settings.Default.MaxHumidity.ToString();
+            temperature.Text = Properties.Settings.Default.MinTemperature.ToString();
+            soilHum.Text = Properties.Settings.Default.MaxSoilHum.ToString();
         }
 
         private void saveBtn_Click(object sender, RoutedEventArgs e)
@@ -33,6 +37,8 @@ namespace GreenHouse
                 Properties.Settings.Default.MinTemperature = Convert.ToDouble(temperature.Text);
                 Properties.Settings.Default.MaxSoilHum = Convert.ToDouble(soilHum.Text);
                 Properties.Settings.Default.Save();
+                MessageBox.Show("Настройки сохранены", "Сохронено", MessageBoxButton.OK, MessageBoxImage.Information);
+                NavigationService.GoBack();
             }
             catch(Exception ex)
             {

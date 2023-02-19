@@ -25,7 +25,7 @@ namespace GreenHouse.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Открыть полив")]
         public string WindowBtnContent {
             get {
                 return ((string)(this["WindowBtnContent"]));
@@ -37,7 +37,7 @@ namespace GreenHouse.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Открыть полив")]
         public string GeneralHumBtnContent {
             get {
                 return ((string)(this["GeneralHumBtnContent"]));
@@ -49,7 +49,7 @@ namespace GreenHouse.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
         public double MinTemperature {
             get {
                 return ((double)(this["MinTemperature"]));
@@ -61,7 +61,7 @@ namespace GreenHouse.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
         public double MaxHumidity {
             get {
                 return ((double)(this["MaxHumidity"]));
@@ -145,7 +145,7 @@ namespace GreenHouse.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
         public double MaxSoilHum {
             get {
                 return ((double)(this["MaxSoilHum"]));
