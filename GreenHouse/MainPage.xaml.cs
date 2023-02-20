@@ -44,5 +44,19 @@ namespace GreenHouse
         {
             NavigationService.Navigate(new SettingsPage());
         }
+
+        private void extraModeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (Properties.Settings.Default.ExtraMode == 0)
+            {
+                Properties.Settings.Default.ExtraMode = 1;
+                MessageBox.Show("Осуществлён переход в экстренный режим", "Внимание", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                Properties.Settings.Default.ExtraMode = 0;
+                MessageBox.Show("Осуществлён выход из экстренного режима", "Внимание", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
     }
 }

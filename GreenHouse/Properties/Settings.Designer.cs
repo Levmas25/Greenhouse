@@ -25,7 +25,7 @@ namespace GreenHouse.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Открыть полив")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Открыть форточки")]
         public string WindowBtnContent {
             get {
                 return ((string)(this["WindowBtnContent"]));
@@ -152,6 +152,18 @@ namespace GreenHouse.Properties {
             }
             set {
                 this["MaxSoilHum"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int ExtraMode {
+            get {
+                return ((int)(this["ExtraMode"]));
+            }
+            set {
+                this["ExtraMode"] = value;
             }
         }
     }

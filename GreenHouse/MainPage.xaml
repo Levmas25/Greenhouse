@@ -22,6 +22,7 @@
                     <Button x:Name="soilBtn" Content="Датчики почвы" Click="soilBtn_Click"></Button>
                     <Button x:Name="medianBtn" Content="Средние значения" Click="medianBtn_Click"></Button>
                     <Button x:Name="settingsBtn" Content="Настройки" Click="settingsBtn_Click"></Button>
+                    <Button x:Name="extraModeBtn" Content="Экстренное управление" Click="extraModeBtn_Click"></Button>
                 </StackPanel>
             </GroupBox>
         </StackPanel>

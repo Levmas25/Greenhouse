@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Windows.Forms.DataVisualization.Charting;
+using System.Data.Entity;
 
 namespace GreenHouse
 {
@@ -86,6 +87,20 @@ namespace GreenHouse
             airRows.Add(GetRequest(4));
 
             airsGrid.ItemsSource = airRows;
+            if (airsGrid.Items.Count > 0)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    Indication indication = new Indication();
+                    indication.Date = new DateTimeOffset(DateTime.Now).ToUnixTimeMilliseconds();
+                    indication.Sensor_type = 1;
+                    indication.Temperature = Convert.ToDecimal(airRows[i].Temperature);
+                    indication.Humidity = Convert.ToDecimal(airRows[i].Humidity);
+                    indication.Sensor_Id = airRows[1].Id;
+                    Utils.db.Indication.Add(indication);
+                }
+                Utils.db.SaveChanges();
+            }
 
 
             if (typeSelection.SelectedIndex == 0)
@@ -139,7 +154,7 @@ namespace GreenHouse
             double temperature = Convert.ToDouble((values["temperature"]));
             double humidity = Convert.ToDouble(values["humidity"]);
 
-            AirRow result = new AirRow(id, temperature, humidity);
+            AirRow result = new AirRow(id, temperature, humidity, DateTime.Now.ToString());
             return result;
         }
     }

@@ -63,6 +63,17 @@ namespace GreenHouse
 
             string now = DateTime.Now.ToString();
 
+            for (int i = 0; i < 6; i++)
+            {
+                Indication indication = new Indication();
+                indication.Date = new DateTimeOffset(DateTime.Now).ToUnixTimeMilliseconds();
+                indication.Sensor_Id = soilRows[i].Id;
+                indication.Humidity = Convert.ToDecimal(soilRows[i].Humidity);
+                indication.Sensor_type = 2;
+                Utils.db.Indication.Add(indication);
+            }
+            Utils.db.SaveChanges();
+
             SoilsChart.Series["Первый"].Points.AddXY(now, soilRows[0].Humidity);
             SoilsChart.Series["Второй"].Points.AddXY(now, soilRows[1].Humidity);
             SoilsChart.Series["Третий"].Points.AddXY(now, soilRows[2].Humidity);
@@ -70,7 +81,10 @@ namespace GreenHouse
             SoilsChart.Series["Пятый"].Points.AddXY(now, soilRows[4].Humidity);
             SoilsChart.Series["Шестой"].Points.AddXY(now, soilRows[5].Humidity);
 
-            CheckValue(soilRows[soilId.SelectedIndex].Humidity);
+            if (Properties.Settings.Default.ExtraMode == 0)
+            {
+                CheckValue(soilRows[soilId.SelectedIndex].Humidity);
+            }
         }
 
         private void CheckValue(double value)
@@ -97,7 +111,7 @@ namespace GreenHouse
             int id = Convert.ToInt32(values["id"]);
             double humidity = Convert.ToDouble(values["humidity"]);
 
-            SoilRow result = new SoilRow(id, humidity);
+            SoilRow result = new SoilRow(DateTime.Now.ToString(), id, humidity);
             return result;
         }
 
@@ -207,7 +221,7 @@ namespace GreenHouse
                     humBtn.Content = Properties.Settings.Default.SixthSoilState;
                     break;
             }
-            if (soilsGrid.Items.Count > 0)
+            if (soilsGrid.Items.Count > 0 && Properties.Settings.Default.ExtraMode == 0)
             {
                 CheckValue(((SoilRow)soilsGrid.Items[soilId.SelectedIndex]).Humidity);
             }
@@ -258,11 +272,6 @@ namespace GreenHouse
                     break;
             }
             Properties.Settings.Default.Save();
-        }
-
-        private void OnClosing(object sender, ExitEventArgs e)
-        {
-
         }
     }
 }

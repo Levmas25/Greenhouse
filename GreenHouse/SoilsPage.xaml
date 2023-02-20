@@ -22,6 +22,7 @@
 
         <DataGrid x:Name="soilsGrid" Grid.Row="1" Loaded="GridLoaded" AutoGenerateColumns="False" ItemsSource="{Binding}">
             <DataGrid.Columns>
+                <DataGridTextColumn x:Name="Date" Header="Дата" Width="SizeToCells" Binding="{Binding Date}"/>
                 <DataGridTextColumn x:Name="Id" Header="Номер датчика" Width="SizeToHeader" Binding="{Binding Id}"/>
                 <DataGridTextColumn x:Name="Humidity" Header="Влажность" Width="SizeToHeader" Binding="{Binding Humidity}"/>
 

@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище mainModel" Provider="System.Data.SQLite.EF6" ProviderManifestToken="Data Source=Greenhouse\Greenhouse.db" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Indication">
+          <Key>
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="Date" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sensor type" Type="integer" Nullable="false" />
+          <Property Name="Temperature" Type="decimal" Precision="53" Scale="0" />
+          <Property Name="Humidity" Type="decimal" Precision="53" Scale="0" />
+          <Property Name="Sensor_Id" Type="integer" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sensor type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="integer" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_Indication_0_0">
+          <End Role="Sensor type" Type="Self.Sensor type" Multiplicity="1" />
+          <End Role="Indication" Type="Self.Indication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sensor type">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Indication">
+              <PropertyRef Name="Sensor type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище mainModelContainer">
+          <EntitySet Name="Indication" EntityType="Self.Indication" store:Type="Tables" />
+          <EntitySet Name="Sensor type" EntityType="Self.Sensor type" store:Type="Tables" />
+          <AssociationSet Name="FK_Indication_0_0" Association="Self.FK_Indication_0_0">
+            <End Role="Sensor type" EntitySet="Sensor type" />
+            <End Role="Indication" EntitySet="Indication" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="mainModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Indication">
+          <Key>
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="Date" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sensor_type" Type="Int64" Nullable="false" />
+          <Property Name="Temperature" Type="Decimal" Precision="53" Scale="0" />
+          <Property Name="Humidity" Type="Decimal" Precision="53" Scale="0" />
+          <Property Name="Sensor_Id" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Sensor_type1" Relationship="Self.FK_Indication_0_0" FromRole="Indication" ToRole="Sensor_type" />
+        </EntityType>
+        <EntityType Name="Sensor_type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Indication" Relationship="Self.FK_Indication_0_0" FromRole="Sensor_type" ToRole="Indication" />
+        </EntityType>
+        <Association Name="FK_Indication_0_0">
+          <End Role="Sensor_type" Type="Self.Sensor_type" Multiplicity="1" />
+          <End Role="Indication" Type="Self.Indication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sensor_type">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Indication">
+              <PropertyRef Name="Sensor_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GreenhouseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Indication" EntityType="Self.Indication" />
+          <EntitySet Name="Sensor_type" EntityType="Self.Sensor_type" />
+          <AssociationSet Name="FK_Indication_0_0" Association="Self.FK_Indication_0_0">
+            <End Role="Sensor_type" EntitySet="Sensor_type" />
+            <End Role="Indication" EntitySet="Indication" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище mainModelContainer" CdmEntityContainer="GreenhouseEntities">
+          <EntitySetMapping Name="Indication">
+            <EntityTypeMapping TypeName="mainModel.Indication">
+              <MappingFragment StoreEntitySet="Indication">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Sensor_type" ColumnName="Sensor type" />
+                <ScalarProperty Name="Temperature" ColumnName="Temperature" />
+                <ScalarProperty Name="Humidity" ColumnName="Humidity" />
+                <ScalarProperty Name="Sensor_Id" ColumnName="Sensor_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sensor_type">
+            <EntityTypeMapping TypeName="mainModel.Sensor_type">
+              <MappingFragment StoreEntitySet="Sensor type">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

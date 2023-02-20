@@ -23,6 +23,7 @@
         
         <DataGrid x:Name="airsGrid" Grid.Column="0" Loaded="GridLoaded" AutoGenerateColumns="False" ItemsSource="{Binding}" Grid.RowSpan="2">
             <DataGrid.Columns>
+                <DataGridTextColumn x:Name="Date" Header="Дата" Binding="{Binding Date}"/>
                 <DataGridTextColumn x:Name="Id" Header="Номер датчика"  Binding="{Binding Id}"/>
                 <DataGridTextColumn x:Name="Temperature" Header="Температура" Binding="{Binding Temperature}"/>
                 <DataGridTextColumn x:Name="Humidity" Header="Влажность" Binding="{Binding Humidity}"/>

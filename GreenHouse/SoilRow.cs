@@ -8,11 +8,13 @@ namespace GreenHouse
 {
     public class SoilRow
     {
+        public string Date { get; set; }
         public int Id { get; set; }
         public double Humidity { get; set; }
 
-        public SoilRow(int id, double humidity)
+        public SoilRow(string date, int id, double humidity)
         {
+            Date = date;
             Id = id;
             Humidity = humidity;
         }

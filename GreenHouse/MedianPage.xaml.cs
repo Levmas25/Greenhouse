@@ -61,24 +61,26 @@ namespace GreenHouse
             medianChart.Series["Влажность воздуха"].Points.AddXY(now, airMedian[1]);
             medianChart.Series["Влажность почвы"].Points.AddXY(now, soilHum);
 
-            if (airMedian[0] < Properties.Settings.Default.MinTemperature && windowBtn.Content.ToString() == "Открыть форточки")
+            if (Properties.Settings.Default.ExtraMode == 0)
             {
-                windowBtn.IsEnabled = false;
-            }
-            else
-            {
-                windowBtn.IsEnabled = true;
-            }
+                if (airMedian[0] < Properties.Settings.Default.MinTemperature && windowBtn.Content.ToString() == "Открыть форточки")
+                {
+                    windowBtn.IsEnabled = false;
+                }
+                else
+                {
+                    windowBtn.IsEnabled = true;
+                }
 
-            if (airMedian[1] > Properties.Settings.Default.MaxHumidity)
-            {
-                generalHumBtn.IsEnabled = false;
+                if (airMedian[1] > Properties.Settings.Default.MaxHumidity)
+                {
+                    generalHumBtn.IsEnabled = false;
+                }
+                else
+                {
+                    generalHumBtn.IsEnabled = true;
+                }
             }
-            else
-            {
-                generalHumBtn.IsEnabled = true;
-            }
-
         }
 
         private void GridLoaded(object sender, RoutedEventArgs e)
@@ -200,6 +202,7 @@ namespace GreenHouse
         {
             Properties.Settings.Default.WindowBtnContent = windowBtn.Content.ToString();
             Properties.Settings.Default.GeneralHumBtnContent = generalHumBtn.Content.ToString();
+            Properties.Settings.Default.ExtraMode = 0;
             Properties.Settings.Default.Save();
 
         }
