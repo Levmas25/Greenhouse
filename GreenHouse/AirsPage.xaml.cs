@@ -141,7 +141,7 @@ namespace GreenHouse
             UpdateGrid(sender, e);
         }
 
-        private AirRow GetRequest(int Id)
+        public AirRow GetRequest(int Id)
         {
             HttpClient client = new HttpClient();
 

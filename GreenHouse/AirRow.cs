@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GreenHouse
 {
-    internal class AirRow
+    public class AirRow
     {
         public string Date { get; set; }
         public int Id { get; set; }
