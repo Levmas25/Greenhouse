@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GreenHouse
 {
-    internal class MedianRow
+    public class MedianRow
     {
         public string date {get; set; } 
         public double medianTemp { get; set; }

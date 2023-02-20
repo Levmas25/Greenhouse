@@ -88,7 +88,7 @@ namespace GreenHouse
             UpdateGrid(sender, e);
         }
 
-        private double SoilRequest()
+        public double SoilRequest()
         {
             HttpClient client = new HttpClient();
 
@@ -110,7 +110,7 @@ namespace GreenHouse
             return result;
         }
 
-        private List<double> AirRequest()
+        public List<double> AirRequest()
         {
             HttpClient client = new HttpClient();
 

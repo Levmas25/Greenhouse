@@ -99,7 +99,7 @@ namespace GreenHouse
             }
         }
 
-        private SoilRow GetRequest(int Id)
+        public SoilRow GetRequest(int Id)
         {
             HttpClient client = new HttpClient();
 

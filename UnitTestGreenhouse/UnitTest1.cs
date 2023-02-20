@@ -11,6 +11,7 @@ namespace UnitTestGreenhouse
         public void TestAPI()
         {
             Assert.IsNotNull(new AirsPage().GetRequest(1));
+            Assert.IsNotNull(new SoilsPage().GetRequest(1));
         }
     }
 }
